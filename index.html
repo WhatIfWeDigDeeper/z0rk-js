@@ -38,6 +38,61 @@
     </p>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="app/index.js"></script>
+    <script>
+        $(function () {
+            'use strict';
+
+            function updateMoves() {
+                let moves = +$('#moves').text();
+                $('#moves').text(++moves)
+            }
+
+            $('body').on('keydown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                let $lineActive = $('.line-active');
+                let $activeInput = $lineActive.find('#userInput');
+
+                let char = String.fromCharCode(e.which).toLowerCase();
+                let text = $activeInput.text();
+
+                // a-z A-Z 0-9 _
+                if (/\w/.test(char)) {
+                    $activeInput.text(text + char)
+                }
+
+                // backspace
+                else if (e.which === 8) {
+                    let arr = text.split('');
+                    arr.splice(-1, 1);
+                    $activeInput.text(arr.join(''))
+                }
+
+                // enter
+                else if (e.which === 13) {
+                    let $line = $('.line-active').clone();
+                    $lineActive.before($line);
+                    $line.removeClass('line-active');
+                    $line.find('.cursor').remove();
+                    $('.line-active').find('#userInput').text('');
+                    parseCommand(text, $line);
+                    updateMoves()
+                }
+
+                // space
+                else if (e.which === 32) {
+                    $activeInput.text(text + ' ')
+                }
+
+                // debug
+                else {
+                    $activeInput.text(text + e.which)
+                }
+            })
+        });
+    </script>
+
 </main>
 </body>
 </html>
