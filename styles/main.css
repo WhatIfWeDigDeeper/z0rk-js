@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+    color: white;
+    width: 640px;
+    height: 480px;
+    margin: 0 auto;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+}
+
+main {
+    position: absolute;
+    bottom: 0;
+}
+
+p {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+li {
+    display: inline-block;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background: #999;
+    color: black;
+    padding: 2px 10px;
+    position: fixed;
+    width: 640px;
+    z-index: 10;
+}
+
+.area,
+.info {
+    display: inline-flex;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.line-active .cursor {
+    animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+    to { opacity: 0; }
+}
