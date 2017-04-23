@@ -47,6 +47,11 @@
                 $('#moves').text(++moves)
             }
 
+            function updateScore(increment) {
+                let score = +$('#score').text();
+                $('#score').text(increment + score);
+            }
+
             $('body').on('keydown', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -76,8 +81,18 @@
                     $line.removeClass('line-active');
                     $line.find('.cursor').remove();
                     $('.line-active').find('#userInput').text('');
-                    parseCommand(text, $line);
-                    updateMoves()
+                    let result = handleCommand(text, $line);
+                    if (!result) {
+                        $line.append("<p>I don't understand</p><br>");
+                        return;
+                    }
+                    if (result.message) {
+                        $line.append(result.message);
+                    }
+                    if (result.score) {
+                        updateScore(result.score);
+                    }
+                    updateMoves();
                 }
 
                 // space
