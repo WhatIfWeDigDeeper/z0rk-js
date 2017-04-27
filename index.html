@@ -81,7 +81,7 @@
                     $line.removeClass('line-active');
                     $line.find('.cursor').remove();
                     $('.line-active').find('#userInput').text('');
-                    let result = handleCommand(text, $line);
+                    let result = main(text, $line);
                     if (!result) {
                         $line.append("<p>I don't understand</p><br>");
                         return;
